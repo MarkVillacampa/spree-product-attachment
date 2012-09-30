@@ -5,7 +5,7 @@ class Spree::Admin::DownloadablesController < Spree::Admin::ResourceController
   update.before :set_viewable
 
   def index
-    respond_to |format|
+    respond_to do |format|
       format.html
     end
   end
