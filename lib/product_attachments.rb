@@ -10,7 +10,7 @@ module ProductAttachments
         Rails.env.production? ? require(c) : load(c)
       end
 
-      Product.class_eval do
+      Spree::Product.class_eval do
         has_many :downloadables, :as => :viewable, :order => :position, :dependent => :destroy
       end
 
