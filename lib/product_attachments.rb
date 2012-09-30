@@ -1,5 +1,4 @@
 require 'spree_core'
-require 'product_attachments_hooks'
 
 module ProductAttachments
   class Engine < Rails::Engine
@@ -11,7 +10,7 @@ module ProductAttachments
         Rails.env.production? ? require(c) : load(c)
       end
 
-      Product.class_eval do 
+      Product.class_eval do
         has_many :downloadables, :as => :viewable, :order => :position, :dependent => :destroy
       end
 
