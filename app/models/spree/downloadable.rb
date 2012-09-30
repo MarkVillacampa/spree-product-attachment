@@ -1,5 +1,5 @@
 require 'zip/zip'
-class Spree::Downloadable < ProductDownload
+class Spree::Downloadable < Spree::ProductDownload
   has_attached_file :attachment,
                     :url => "/downloadable/:id/:basename.:extension",
                     :path => ":rails_root/public/downloadable/:id/:basename.:extension"
