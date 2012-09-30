@@ -1,6 +1,6 @@
-<%= render :partial => 'admin/shared/product_sub_menu' %>
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
 
-<%= render :partial => 'admin/shared/product_tabs', :locals => {:current => "Downloadables"} %>
+<%= render :partial => 'spree/admin/shared/product_tabs', :locals => {:current => "Downloadables"} %>
 
 <div class="yui-g">
 
@@ -12,18 +12,18 @@
 			<% f.field_container :name do %>
 				<%= f.label :name, t("filename") %> <span class="required">*</span> <br/>
 				<%= f.file_field :attachment %>
-		  <% end %> 
-		
+		  <% end %>
+
 			<% f.field_container :title do %>
 				<%= f.label t("title") %><span> <sup>Defaults to filename</sup></span><br/>
 				<%= f.text_field :title %>
 		  <% end %>
-	
+
 			<% f.field_container :description do %>
 				<%= f.label t("description") %><br/>
 				<%= f.text_field :description %>
 		  <% end %>
-		  
+
 		  <% f.field_container :viewable_id do %>
   		  <% if @product.has_variants? %>
           <%= f.label Variant.human_name + ": " %>
@@ -32,8 +32,8 @@
           <%= hidden_field_tag :product_id, @product.id %>
         <% end %>
       <% end %>
-      
-      
+
+
       <p class="form-buttons">
         <%= button t("update") %>
         or <%= link_to t("cancel"), "#", :id => "cancel_link" %>
@@ -45,7 +45,7 @@
 
 <% content_for :head  do %>
   <script type="text/javascript">
-     jQuery(document).ready(function(){  
+     jQuery(document).ready(function(){
       jQuery("#downloadable_viewable_id").change( function() {
         console.log(jQuery(this).val());
       });
@@ -53,7 +53,7 @@
 
   </script>
 <% end %>
-	
+
 <table class="index">
 	<tr>
 	  <% if @product.has_variants? %>
