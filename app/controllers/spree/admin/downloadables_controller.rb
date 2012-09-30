@@ -4,6 +4,10 @@ class Spree::Admin::DownloadablesController < Spree::Admin::ResourceController
   create.before :set_viewable
   update.before :set_viewable
 
+  def index
+    respond_with(@product)
+  end
+
   # new_action.after do
   #   respond_to do |wants|
   #     wants.html {render :action => :new, :layout => false}
