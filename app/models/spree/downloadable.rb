@@ -1,4 +1,5 @@
 require 'zip/zip'
+
 class Spree::Downloadable < Spree::ProductDownload
   has_attached_file :attachment,
                     :url => "/downloadable/:id/:basename.:extension",
@@ -6,8 +7,12 @@ class Spree::Downloadable < Spree::ProductDownload
 
   validates_attachment_presence :attachment
 
+  attr_accessible :title, :description, :attachment
+
   before_save :set_title
   after_save :create_zip, :unless => :zipfile?
+
+  belongs_to :product
 
   def filename
      return attachment_file_name
@@ -37,7 +42,7 @@ class Spree::Downloadable < Spree::ProductDownload
 
   # create a zipped archive file for any product or variant with more than 1 file.
   def create_zip
-    variant_downloadable = Downloadable.find(:all, :conditions =>
+    variant_downloadable = Spree::Downloadable.find(:all, :conditions =>
                                             ["viewable_id = ? and attachment_content_type != ?", viewable_id, "application/zip"])
 
     if(variant_downloadable.size > 1)

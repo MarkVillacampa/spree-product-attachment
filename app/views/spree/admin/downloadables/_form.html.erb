@@ -1,0 +1,23 @@
+<%= f.field_container :name do %>
+  <%= f.label :name, t("filename") %> <span class="required">*</span> <br/>
+  <%= f.file_field :attachment %>
+<% end %>
+
+<%= f.field_container :title do %>
+  <%= f.label t("title") %><span> <sup>Defaults to filename</sup></span><br/>
+  <%= f.text_field :title %>
+<% end %>
+
+<%= f.field_container :description do %>
+  <%= f.label t("description") %><br/>
+  <%= f.text_field :description %>
+<% end %>
+
+<%= f.field_container :viewable_id do %>
+  <% if @product.has_variants? %>
+    <%= f.label Variant.human_name + ": " %>
+    <%= f.select :viewable_id, @variants %>
+  <% else %>
+    <%= hidden_field_tag :product_id, @product.id %>
+  <% end %>
+<% end %>
