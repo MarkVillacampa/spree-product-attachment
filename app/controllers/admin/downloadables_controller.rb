@@ -1,4 +1,4 @@
-class Admin::DownloadablesController < Admin::BaseController
+class Spree::Admin::DownloadablesController < Spree::Admin::BaseController
   resource_controller
   before_filter :load_data
 
@@ -9,7 +9,7 @@ class Admin::DownloadablesController < Admin::BaseController
   create.response do |wants|
     wants.html {redirect_to admin_product_downloadables_url(@product)}
   end
-  
+
   create.failure.wants.html do
     render :action => :index
   end
@@ -33,11 +33,11 @@ class Admin::DownloadablesController < Admin::BaseController
     end
   end
 
-  destroy.before do 
+  destroy.before do
     @viewable = object.viewable
   end
 
-  destroy.response do |wants| 
+  destroy.response do |wants|
     wants.html do
       render :text => ""
     end
@@ -46,16 +46,16 @@ class Admin::DownloadablesController < Admin::BaseController
   private
 
   def load_data
-    @product = Product.find_by_permalink(params[:product_id])
-    @variants = @product.variants.collect do |variant| 
+    @product = Spree::Product.find_by_permalink(params[:product_id])
+    @variants = @product.variants.collect do |variant|
       [variant.options_text, variant.id ]
     end
 
     @variants.insert(0, "All")
-    
+
     # @download_limits = @product.variants.collect do |variant|
     #   variant.downloadables.empty? ? ("\"#{variant.id}\": \'\'") : ("\"#{variant.id}\": #{variant.downloadables.first.download_limit}")
     # end
-    
+
   end
 end
