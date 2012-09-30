@@ -70,7 +70,7 @@ class Spree::Admin::DownloadablesController < Spree::Admin::ResourceController
     end
 
     def set_viewable
-      if params[:downloadable].has_key? :viewable_id
+      if params[:downloadable] && params[:downloadable].has_key? :viewable_id
         if params[:downloadable][:viewable_id] == "All"
           object.viewable_type = 'Product'
           object.viewable_id = @product.id
