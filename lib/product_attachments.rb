@@ -3,6 +3,8 @@ require 'spree_core'
 module ProductAttachments
   class Engine < Rails::Engine
 
+    engine_name 'spree_product_attachments'
+
     config.autoload_paths += %W(#{config.root}/lib)
 
     def self.activate
