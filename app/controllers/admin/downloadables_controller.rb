@@ -1,9 +1,9 @@
-class Spree::Admin::DownloadablesController < Spree::Admin::BaseController
+class Spree::Admin::DownloadablesController < ResourceController
   before_filter :load_data
 
-  # new_action.response do |wants|
-  #   wants.html {render :action => :new, :layout => false}
-  # end
+  new_action.response do |wants|
+    wants.html {render :action => :new, :layout => false}
+  end
 
   create.response do |wants|
     wants.html {redirect_to admin_product_downloadables_url(@product)}
