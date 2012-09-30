@@ -1,20 +1,26 @@
 class Spree::Admin::DownloadablesController < Spree::Admin::ResourceController
   before_filter :load_data
 
-  new_action.response do |wants|
-    wants.html {render :action => :new, :layout => false}
+  new_action.after do
+    respond_to do |wants|
+      wants.html {render :action => :new, :layout => false}
+    end
   end
 
-  create.response do |wants|
-    wants.html {redirect_to admin_product_downloadables_url(@product)}
+  create.after do
+    respond_to do |wants|
+      wants.html {redirect_to admin_product_downloadables_url(@product)}
+    end
   end
 
-  create.failure.wants.html do
-    render :action => :index
-  end
+  # create.failure.wants.html do
+  #   render :action => :index
+  # end
 
-  update.response do |wants|
-    wants.html {redirect_to admin_product_downloadables_url(@product)}
+  update.after do
+    respond_to do |wants|
+      wants.html {redirect_to admin_product_downloadables_url(@product)}
+    end
   end
 
   create.before do
@@ -36,9 +42,11 @@ class Spree::Admin::DownloadablesController < Spree::Admin::ResourceController
     @viewable = object.viewable
   end
 
-  destroy.response do |wants|
-    wants.html do
-      render :text => ""
+  destroyafter do
+    respond_to do |wants|
+      wants.html do
+        render :text => ""
+      end
     end
   end
 
