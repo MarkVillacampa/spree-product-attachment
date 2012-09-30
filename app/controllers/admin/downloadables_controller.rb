@@ -1,4 +1,4 @@
-class Spree::Admin::DownloadablesController < ResourceController
+class Spree::Admin::DownloadablesController < Spree::Admin::ResourceController
   before_filter :load_data
 
   new_action.response do |wants|
