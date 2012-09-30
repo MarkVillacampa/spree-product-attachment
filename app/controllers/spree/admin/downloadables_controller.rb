@@ -1,4 +1,4 @@
-class Admin::DownloadablesController < Admin::ResourceController
+class Spree::Admin::DownloadablesController < Spree::Admin::ResourceController
   before_filter :load_data
 
   create.before :set_viewable
