@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+ProductAttachments::Engine.routes.draw do
   namespace :admin do
     resources :products do
       resources :downloadables
