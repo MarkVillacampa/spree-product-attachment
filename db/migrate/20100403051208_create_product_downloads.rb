@@ -1,7 +1,7 @@
 class CreateProductDownloads < ActiveRecord::Migration
 
   def self.up
-    create_table :product_downloads do |t|
+    create_table :spree_product_downloads do |t|
       t.string :title
       t.string :description
       t.string :attachment_file_name
@@ -12,7 +12,7 @@ class CreateProductDownloads < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :product_downloads
+    drop_table :spree_product_downloads
   end
 
 end
