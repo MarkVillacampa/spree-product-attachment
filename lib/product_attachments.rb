@@ -1,9 +1,8 @@
-require 'spree_core'
+require 'spree/core'
 
 module ProductAttachments
   class Engine < Rails::Engine
-    require 'spree/core'
-    isolate_namespace Spree
+
     engine_name 'spree_product_attachments'
 
     config.autoload_paths += %W(#{config.root}/lib)
