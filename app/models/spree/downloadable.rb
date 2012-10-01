@@ -47,7 +47,7 @@ class Spree::Downloadable < Spree::ProductDownload
 
     if(variant_downloadable.size > 1)
       bundle_filename = "#{variant_downloadable.first.viewable_id}_bundle.zip"
-      bundle_fullpath = "#{RAILS_ROOT}/tmp/" + bundle_filename
+      bundle_fullpath = "#{Rails.root}/tmp/" + bundle_filename
 
        # Create the zip file
        Zip::ZipFile.open(bundle_fullpath, Zip::ZipFile::CREATE) {
