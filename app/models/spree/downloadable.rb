@@ -45,40 +45,40 @@ class Spree::Downloadable < Spree::ProductDownload
     variant_downloadable = Spree::Downloadable.find(:all, :conditions =>
                                             ["viewable_id = ? and attachment_content_type != ?", viewable_id, "application/zip"])
 
-    if(variant_downloadable.size > 1)
-      bundle_filename = "#{variant_downloadable.first.viewable_id}_bundle.zip"
-      bundle_fullpath = "#{Rails.root}/tmp/" + bundle_filename
+    # if(variant_downloadable.size > 1)
+    #   bundle_filename = "#{variant_downloadable.first.viewable_id}_bundle.zip"
+    #   bundle_fullpath = "#{Rails.root}/tmp/" + bundle_filename
 
-       # Create the zip file
-       Zip::ZipFile.open(bundle_fullpath, Zip::ZipFile::CREATE) {
-        |zipfile|
-        # collect the downlodables
-        variant_downloadable.each do |downloadable|
-            if downloadable.enabled && (downloadable.filename != nil)
-              # add each download to the archive
-              zipfile.add(downloadable.filename, downloadable.attachment.path)
-            end
-        end
-       }
+    #    # Create the zip file
+    #    Zip::ZipFile.open(bundle_fullpath, Zip::ZipFile::CREATE) {
+    #     |zipfile|
+    #     # collect the downlodables
+    #     variant_downloadable.each do |downloadable|
+    #         if downloadable.enabled && (downloadable.filename != nil)
+    #           # add each download to the archive
+    #           zipfile.add(downloadable.filename, downloadable.attachment.path)
+    #         end
+    #     end
+    #    }
 
-       # check if there is an existing zip file Downloadable object.
-       unless(zip_downloadable = Downloadable.find(:first, :conditions => ["attachment_file_name = ?", bundle_filename]))
-         zip_downloadable = Downloadable.new
-       end
-       zip_downloadable.viewable_id = viewable_id
-       zip_downloadable.viewable_type = viewable_type
-       # zip_downloadable.download_limit = download_limit
-       zip_downloadable.description = I18n::t('zip-file-description')
-       zip_downloadable.attachment = File.new(bundle_fullpath)
-       zip_downloadable.attachment_content_type = "application/zip"
-       zip_downloadable.save
-       zip_downloadable.move_to_top
+    #    # check if there is an existing zip file Downloadable object.
+    #    unless(zip_downloadable = Downloadable.find(:first, :conditions => ["attachment_file_name = ?", bundle_filename]))
+    #      zip_downloadable = Downloadable.new
+    #    end
+    #    zip_downloadable.viewable_id = viewable_id
+    #    zip_downloadable.viewable_type = viewable_type
+    #    # zip_downloadable.download_limit = download_limit
+    #    zip_downloadable.description = I18n::t('zip-file-description')
+    #    zip_downloadable.attachment = File.new(bundle_fullpath)
+    #    zip_downloadable.attachment_content_type = "application/zip"
+    #    zip_downloadable.save
+    #    zip_downloadable.move_to_top
 
-       # skip callback, but update all download limits.
-       # Downloadable.update_all(["viewable_id = ?", viewable_id]) if !download_limit.nil?
+    #    # skip callback, but update all download limits.
+    #    # Downloadable.update_all(["viewable_id = ?", viewable_id]) if !download_limit.nil?
 
-       # delete file from tmp folder.
-       File.delete(bundle_fullpath)
-    end
+    #    # delete file from tmp folder.
+    #    File.delete(bundle_fullpath)
+    # end
   end
 end
