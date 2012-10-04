@@ -1,23 +1,23 @@
-<%= f.field_container :name do %>
-  <%= f.label :name, t("filename") %> <span class="required">*</span> <br/>
-  <%= f.file_field :attachment %>
-<% end %>
+<div data-hook="admin_downloadables_form_fields">
+  <tr data-hook="file">
+    <td><%= f.label :name, t("filename") %> <span class="required">*</span></td>
+    <td><%= f.file_field :attachment %></td>
+  </tr>
+  <tr data-hook="title">
+    <td><%= f.label t("title") %><span> <sup>Defaults to filename</sup></span><br/></td>
+    <td><%= f.text_field :title %></td>
+  </tr>
+  <tr data-hook="description">
+    <td><%= f.label t("description") %></td>
+    <td><%= f.text_field :description %></td>
+  </tr>
 
-<%= f.field_container :title do %>
-  <%= f.label t("title") %><span> <sup>Defaults to filename</sup></span><br/>
-  <%= f.text_field :title %>
-<% end %>
-
-<%= f.field_container :description do %>
-  <%= f.label t("description") %><br/>
-  <%= f.text_field :description %>
-<% end %>
-
-<%= f.field_container :viewable_id do %>
   <% if @product.has_variants? %>
-    <%= f.label Variant.human_name + ": " %>
-    <%= f.select :viewable_id, @variants %>
+    <tr data-hook="variants">
+      <td><%= f.label Spree::Variant.model_name.human + ": " %></td>
+      <td><%= f.select :viewable_id, @variants %></td>
+    </tr>
   <% else %>
     <%= hidden_field_tag :product_id, @product.id %>
   <% end %>
-<% end %>
+</div>

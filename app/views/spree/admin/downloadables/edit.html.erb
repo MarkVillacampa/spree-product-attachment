@@ -2,47 +2,15 @@
 
 <%= render :partial => 'spree/admin/shared/product_tabs', :locals => {:current => "Downloadable Links"} %>
 
-<% form_for [:admin, @product, @downloadable], :html => { :method => :put, :multipart => true } do |f| %>
-<!--   	<fieldset>
-		<% f.field_container :name do %>
-			<%= f.label :name, t("filename") %> <span class="required">*</span>
-			<sup>Leaving this blank will use the file stored in the database</sup><br/>
-			<%= f.file_field :downloadable %><br/>
+<%= render :partial => 'spree/products/downloadable_links', :locals => {:product => @product} %>
 
-	    <% end %>
-q
-		<%# f.field_container :title do %>
-			<%#= f.label t("title") %><span> <sup>Defaults to filename if blank</sup></span><br/>
-			<%#= f.text_field :title %>
-	  	<%# end %>
-
-		<% f.field_container :description do %>
-			<%= f.label t("description") %><br/>
-			<%= f.text_field :description %>
-	  	<% end %>
-
-		<% f.field_container :enabled do %>
-			<%= f.label t("enabled") %><br/>
-			<%= f.check_box :enabled %>
-	  <% end %>
-
-		  <% if @product.has_variants? %>
-        <%= f.label Spree::Variant.model_name.human + ": " %>
-        <%= f.select :viewable_id, @variants %>
-      <% else %>
-        <%= hidden_field_tag :product_id, @product.id %>
-      <% end %>
-
-
-      <p class="form-buttons">
-        <%= button t("update") %>
-        or <%= link_to t("cancel"), admin_product_downloadables_path, :id => "cancel_link" %>
-      </p>
-	</fieldset> -->
+<%= form_for [:admin, @product, @object], :html => { :method => :put, :multipart => true } do |f| %>
   <fieldset>
   <legend>Edit downloadable file</legend>
 
-  <%= render :partial => 'form', :locals => { :f => f, :downloadable => @downloadable } %>
+  <table class="basic-table" data-hook="edit_downloadable">
+    <%= render :partial => 'form', :locals => { :f => f, :object => @object} %>
+  </table>
 
   <p class="form-buttons">
     <%= button t("update") %>

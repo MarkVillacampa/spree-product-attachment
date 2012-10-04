@@ -2,7 +2,9 @@
   <fieldset>
   <legend>New downloadable file</legend>
 
-  <%= render :partial => 'form', :locals => { :f => f } %>
+  <table class="basic-table" data-hook="add_downloadable">
+    <%= render :partial => 'form', :locals => { :f => f } %>
+  </table>
 
   <p class="form-buttons">
     <%= button t("update") %>
