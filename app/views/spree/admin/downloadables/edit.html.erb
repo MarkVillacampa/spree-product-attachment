@@ -2,7 +2,7 @@
 
 <%= render :partial => 'spree/admin/shared/product_tabs', :locals => {:current => "Downloadable Links"} %>
 
-<% form_for [:admin, @product, @downloadable], :html => { :method => :put, :multipart => true }) do |f| %>
+<% form_for [:admin, @product, @downloadable], :html => { :method => :put, :multipart => true } do |f| %>
   	<fieldset>
 		<% f.field_container :name do %>
 			<%= f.label :name, t("filename") %> <span class="required">*</span>
