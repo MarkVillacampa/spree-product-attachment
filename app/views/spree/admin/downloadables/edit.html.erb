@@ -26,8 +26,8 @@
 			<%= f.check_box :enabled %>
 	  <% end %>
 
-		  <% if @product.variants? %>
-        <%= f.label Variant.human_name + ": " %>
+		  <% if @product.has_variants? %>
+        <%= f.label Spree::Variant.model_name.human + ": " %>
         <%= f.select :viewable_id, @variants %>
       <% else %>
         <%= hidden_field_tag :product_id, @product.id %>
